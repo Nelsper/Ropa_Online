@@ -1,100 +1,70 @@
-
-import { useState } from 'react'
+import { useState } from "react";
+import InputRegister from "./InputRegister";
 
 const RegisterForm = () => {
-    const [firstname, setFirstName] = useState('');
-    const [lastname, setLastName] = useState('');
-    const [email, setEmail] = useState('');
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+ 
+  //Declaramos un useState general para todos los inputs
+  const [inputsRegister, setInputsRegister] = useState({
+    firstname: '',
+    lastname: '',
+    email: '',
+    username: '',
+    password: ''
+  });
 
-    const handleFirstName = (e) => {
-        setFirstName( e.target.value)
-        console.log(e.target.value);
-    }
-    const handleLastName = (e) => {
-        setLastName( e.target.value)
-        console.log(e.target.value);
-    }
-    const handleEmail = (e) => {
-        setEmail( e.target.value)
-        console.log(e.target.value);
-    }
-    const handleUsername = (e) => {
-        setUsername( e.target.value)
-        console.log(e.target.value);
-    }
-    const handlePassword = (e) => {
-        setPassword( e.target.value)
-        console.log(e.target.value);
-    }
+  //Funcion manejadora para todos los inputs
+  const handleInputs = (e) => {
+    setInputsRegister( {...inputsRegister, [e.target.name]: e.target.value} )
+    console.log(inputsRegister);
+  }
+
+  //Funcion Manejadora del boton submit
+  const handleFormSubmit = () => {
+    alert(JSON.stringify(inputsRegister));
+    //Todo: Envio de toda la información al Server
+  };
 
   return (
     <>
-        <div className='card input-card'>
-            <div className='mb-3'>
-                
-                <center><img src="images/logo_01.png" alt="" width={'100'}/></center>
-                
-                <label htmlFor="" className='form-label'>
-                ACCOUNT
-                </label>
-                <label htmlFor="" className='form-label'>
-                    Personal Information
-                </label>
+      {/* Inicio del elemento card */}
+      <div className="card input-card">
 
-                <input
-                type = "text"
-                className='form-control'
-                id="firstname"
-                name = "firstname"
-                placeholder='Type your Firstname'
-                value = {firstname}
-                onChange = { handleFirstName}/>
+        {/* Inicio Formulario */}
+        <form action="" onSubmit={ handleFormSubmit }>
+          <div className="mb-3">
+            <center>
+              <img src="images/logo_01.png" alt="" width={"100"} />
+            </center>
 
-                <input
-                type = "text"
-                className='form-control'
-                id="lastname"
-                name = "lastname"
-                placeholder='Type your Lastname'
-                value = {lastname}
-                onChange = { handleLastName}/>
-                
-                <input
-                type = "text"
-                className='form-control'
-                id="email"
-                name = "email"
-                placeholder='Type your Email'
-                value = {email}
-                onChange = { handleEmail}/>
+            <label htmlFor="" className="form-label">
+              ACCOUNT
+            </label>
+            <label htmlFor="" className="form-label">
+              Personal Information
+            </label>
 
-                <input
-                type = "text"
-                className='form-control'
-                id="username"
-                name = "username"
-                placeholder='Type your Username'
-                value = {username}
-                onChange = { handleUsername }/>
+                <InputRegister title='First Name' type='text' name='firstname' value={inputsRegister.firstname} handle={handleInputs}/>
+                <InputRegister title='Last Name'type='text' name='lastname'  value={inputsRegister.lastname} handle={handleInputs}/>
+                <InputRegister title='Email'type='text' name='email'  value={inputsRegister.email} handle={handleInputs}/>
+                <InputRegister title='UserName'type='text' name='username'  value={inputsRegister.username} handle={handleInputs}/>
+                <InputRegister title='Password'type='text' name='password'  value={inputsRegister.password} handle={handleInputs}/>
 
-                <input
-                type = "text"
-                className='form-control'
-                id="password"
-                name = "password"
-                placeholder='Type your Password'
-                value = {password}
-                onChange = { handlePassword}/>
-
-                {/* Boton registro */}
-                <center><button className="btn btn-outline-primary" style={{ margin: '20px'}}>Register</button></center>
-
-            </div>
-        </div> 
+            {/* Boton registro */}
+            <center>
+              <button
+                type="submit"
+                className="btn btn-outline-primary"
+                style={{ margin: "20px" }}
+              >
+                Register
+              </button>
+            </center>
+          </div>
+        </form>
+        {/* Fin Formulario */}
+      </div>
     </>
-  )
-}
+  );
+};
 
-export default RegisterForm
+export default RegisterForm;

@@ -10,7 +10,7 @@ const NavBar = () => {
   ];
   return (
     <>
-      <nav className="navbar navbar-expand-sm bg-dark navbar-dark">
+      <nav className="navbar navbar-expand-sm fixed-top bg-dark navbar-dark">
         <div className="container-fluid">
           <ul className="navbar-nav">
             <NavItems navItems={navItems} />
@@ -39,7 +39,7 @@ const NavBar = () => {
           </ul>
         </div>
 
-         <div className="logo" style={{justifyContent: "center"}}>
+         <div className="logo position-absolute top-50 start-50 translate-middle ">
             <img src="images/logo_white_02.png" alt="" width={"20px"}/>
          </div> 
 

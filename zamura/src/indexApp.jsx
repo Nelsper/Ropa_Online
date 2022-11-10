@@ -3,20 +3,25 @@ import { Outlet } from "react-router-dom";
 
 
 const IndexApp = () => {
-    const oferta = "REBAJAS ¡Hasta el 50%!"
+  
 
-    return(
-        <>
-            <header>
-                <h1 className="ofer">{oferta}</h1>
-                <NavBar/>
-            </header>
-            <main>
-                <Outlet/>
-            </main>
+  return (
+    <>
+      <header>
+
+        <NavBar />
+      </header>
+      <main>
+        <Outlet />
+      </main>
+        <div className="fixed-top-2">
             
-        
-        </>
-    );
+            <div className="bg-7">
+                
+                <h1 className="ofer efect">REBAJAS ¡Hasta el 50%!</h1>
+            </div>
+        </div>
+    </>
+  );
 };
-export default IndexApp
+export default IndexApp;
