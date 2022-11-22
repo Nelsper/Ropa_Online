@@ -18,7 +18,7 @@ const createUser = (req, res) => {
     if (err) {
       res.status(500).send({ msg: "Error de Servidor" });
     } else if (userFinded) {
-      res.send({ msg: "El Usuario Ya Existe" });
+      res.send({ msg: "El Usuario Ya Existe en la BD", status: 403 });
     } else {
       //Encriptamos el Password
       const saltRouns = 10;
@@ -31,7 +31,7 @@ const createUser = (req, res) => {
           newUser
             .save()
             .then(() =>
-              res.status(200).send({ msg: "Usuario Creado con Exito" })
+              res.status(200).send({ msg: "Usuario Creado con Exito", status:200 })
             )
             .catch((err) => res.send({ msg: err }));
         } else {
@@ -71,34 +71,12 @@ const updateUser = (req, res) => {
       res.status(500).send({ msg: "Error del Servidor" });
     } else if (userFinded) {
       if (userFinded.id !== idToUpdate) {
-        res.send({ msg: "Ya existe un usuario con  este email" });
+        res.send({ msg: "Ya existe un usuario con este email", user: userFinded });
       } else {
-        User.findByIdAndUpdate(
-          idToUpdate,
-          userToEdit,
-          { returnDocument: "after" },
-          (err, userUpdated) => {
-            if (userUpdated) {
-              res.send({ msg: "Usuario Actualizado", user: userUpdated });
-            } else {
-              res.status(404).send({ msg: "El Usuario No Existe" });
-            }
-          }
-        );
+        userIsUpdate(idToUpdate, userToEdit, res)
       }
     } else {
-      User.findByIdAndUpdate(
-        idToUpdate,
-        userToEdit,
-        { returnDocument: "after" },
-        (err, userUpdated) => {
-          if (userUpdated) {
-            res.send({ msg: "Usuario Actualizado", user: userUpdated });
-          } else {
-            res.status(404).send({ msg: "El Usuario No Existe" });
-          }
-        }
-      );
+        userIsUpdate(idToUpdate, userToEdit, res)
     }
   });
 };
@@ -116,9 +94,23 @@ const deleteUser = (req, res) => {
   });
 };
 
+//Funcion logear el usuario
 const loginUser = (req, res) => {
   res.send({ msg: "User Login On" });
 };
+
+//Funcion para guardar el usuario en el Endpoint
+const userIsUpdate = (id, update, res) => {
+  User.findByIdAndUpdate(id, update, { new: true },(err, userUpdated) => {
+      if (userUpdated) {
+        res.send({ msg: "Usuario Actualizado", user: userUpdated });
+      }else if(!userUpdated){
+        res.status(404).send({ msg: "El Usuario No Existe" });
+      }else{
+        res.status(500).send({msg: 'Error del Servidor: ' + err}) 
+      }
+    });
+}
 
 module.exports = {
   createUser,

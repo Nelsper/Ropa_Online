@@ -5,10 +5,10 @@ import {Route,
 
   from "react-router-dom";
   import IndexApp from "../IndexApp";
-  import Women from "../components/women/Women";
-  import Men from "../components/men/Men";
   import Home from "../Home";
-  import RegisterForm from "../components/registerForm/RegisterForm"
+  
+  import { LoginForm, Men, RegisterForm, Women } from "../components";
+  
 
 export const router = createBrowserRouter(
     createRoutesFromElements([
@@ -16,7 +16,8 @@ export const router = createBrowserRouter(
         <Route index element={<Home />} />,
         <Route path="/Women" element={<Women />} />,
         <Route path="/Men" element={<Men />} />,
-        <Route path="/Register" element={<RegisterForm />} />
+        <Route path="/Register" element={<RegisterForm />} />,
+        <Route path="/Login" element={<LoginForm />} />,
       </Route>
     ])
   );

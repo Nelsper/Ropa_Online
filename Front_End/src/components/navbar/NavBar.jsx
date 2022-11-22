@@ -30,7 +30,7 @@ const NavBar = () => {
             </li>
 
             <li className="nav-item">
-              <Link className="nav-link" to={""}>
+              <Link className="nav-link" to={"/Login"}>
                 <i className="bi bi-person" style={{ margin: "5px" }} />
                 Login
               </Link>

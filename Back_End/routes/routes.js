@@ -14,6 +14,8 @@ router.get("/", (req, res) =>{
     res.send('<h1>Hola Mundo</h1>')
 })
 
+
+
 //Operaciones CRUD Básicas de una BD------
 router.post('/createUser', createUser)
 router.get('/getAllUsers', readUsers)
