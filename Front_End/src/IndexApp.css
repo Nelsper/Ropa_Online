@@ -4,7 +4,7 @@
     width: 100%;
     margin: 0;
     vertical-align: middle;
-    background-color: #8a0278;
+    background-color: #1d8ffa;
     text-align: center;
     color:aliceblue;
     font-family: Arial, Helvetica, sans-serif;
@@ -15,7 +15,7 @@ body {
     /* background-image: url("./img/carrusel_01.jpg"); */
     background-size: cover;
     background-repeat: no-repeat;
-    background-color: #a9aaaa;
+    background-color: #aadbf7;
     margin: 0;
     padding: 0;
     border: 0;
@@ -41,7 +41,7 @@ body {
     text-align: center;
     margin: 10px;
     font-family: fantasy;
-    color: #990101;  
+    color: #030303;  
 }
 .fixed-top  {
     top: 22px;
@@ -58,6 +58,9 @@ body {
   }
   .men {
     margin-top: 85px;
+  }
+  i {
+    color: #5bb9f8;
   }
 
   

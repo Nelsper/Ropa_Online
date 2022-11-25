@@ -40,7 +40,7 @@ const NavBar = () => {
         </div>
 
          <div className="logo position-absolute top-50 start-50 translate-middle ">
-            <img src="images/logo_white_02.png" alt="" width={"20px"}/>
+            <img src="images/logo_white_02.png" alt="" width={"100px"}/>
          </div> 
 
       </nav>

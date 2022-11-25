@@ -4,7 +4,7 @@ const {
     readUsers, 
     updateUser, 
     deleteUser,
-loginUser } = require('../controllers/UserControllers');
+    loginUser } = require('../controllers/UserControllers');
 
 //const para crear las rutas API Rest
 const router = express.Router();
@@ -23,7 +23,7 @@ router.put('/updateUser/:id', updateUser)
 router.delete('/deleteUser/:id', deleteUser)
 
 //Logear usuario
-router.post('/signIn', loginUser) //ToDo...
+router.post('/log-in', loginUser) //ToDo...
 
 //Exportar a router
 module.exports = router;

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { singUpUser } from "../../api/userApi";
 import InputRegister from "./InputRegister";
+import Swal from 'sweetalert2'
 
 
 
@@ -27,23 +28,24 @@ export const RegisterForm = () => {
     e.preventDefault() //Desactiva la recarga del formulario
 
     //ToDo... Validación del formulario
-    if(firstname === ''){
-        alert('Fisrtname is required')
-    }else if(lastname === ''){
-        alert('Lastname is required ')
-    }else if(email === ''){
-      alert('Email is required')
-    }else if(username === ''){
-      alert('Username is required')
-    }else if(password === ''){
-      alert('Password required')
+    if(!firstname || !lastname || !email || !username || !password){
+      Swal.fire(
+        'Error',
+        'All inputs are required',
+        'error'
+      )
     }else{
       const result = await singUpUser(inputsRegister)
-      // console.log('Desde el form resgister');
-      // console.log(result);
+      Swal.fire(
+        'Success',
+        'All inputs are required',
+        'success'
+      ).then((result) => {
+        if(result.isConfirmed){
+          window.location.href = '/'
+        }
+      })
       if(result.status === 200){
-        alert(result.msg)
-        //Limpiando los inputs
         setInputsRegister({
           firstname: '',
           lastname: '',
@@ -51,11 +53,6 @@ export const RegisterForm = () => {
           username: '',
           password: ''
         })
-        //Retorna el usuario al Index
-        setTimeout(() =>{
-          window.location.href = '/'
-        },3000);
-
       }else{
         alert(result.msg)
       }
@@ -71,13 +68,13 @@ export const RegisterForm = () => {
         <form onSubmit={ handleFormSubmit }>
           <div className="mb-3">
             <center>
-              <img src="images/logo_01.png" alt="" width={"100"} />
+              <img src="images/logo_01.png" alt="" width={"100"} style= {{paddingBlockEnd: '20px'}}/>
             </center>
 
             <label htmlFor="" className="form-label">
               ACCOUNT
             </label>
-            <label htmlFor="" className="form-label">
+            <label htmlFor="" className="form-label" style= {{paddingBlockEnd: '20px'}}>
               Personal Information
             </label>
 

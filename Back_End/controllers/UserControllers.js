@@ -96,10 +96,33 @@ const deleteUser = (req, res) => {
 
 //Funcion logear el usuario
 const loginUser = (req, res) => {
-  res.send({ msg: "User Login On" });
+  const { body } = req
+  const { email, password } = body
+  //verificamos si el usuario existe o no
+  User.findOne({ email }, (err, userFinded) => {
+    if(err){
+      res.send({msg: 'Error del servidor' + err })
+    }else if(!userFinded){
+      res.send({msg: 'Usuario o Password invalido' })
+    }else{
+      //si el usuario fue encontrado verificamos que los password coincidan
+      const passwordToCompare = password + salt
+      bcrypt.compare(passwordToCompare, userFinded.password, (err, result) => {
+        if(err){
+          res.send({msg: 'Error del servidor'})
+        }else if(!result){
+          res.send({msg: 'Usuario o Password invalido'})
+        }else{
+          res.send({msg: 'Usuario encontrado', user: userFinded })
+        }
+      })
+
+    }
+  })
 };
 
-//Funcion para guardar el usuario en el Endpoint
+
+//Funcion auxiliar para optimizar el update del user
 const userIsUpdate = (id, update, res) => {
   User.findByIdAndUpdate(id, update, { new: true },(err, userUpdated) => {
       if (userUpdated) {
