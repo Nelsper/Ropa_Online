@@ -29,3 +29,19 @@ export const singUpUser = (data) =>{
     })
     .catch(err => console.log(err.message))
 }
+
+//Api para loguear el usuario
+export const userSignIn = (dataUser) => {
+    const url = `${base_url}/${api_version}/log-in`
+    const requestInit = {
+        method: 'POST',
+        body: JSON.stringify(dataUser),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }
+    return fetch( url, requestInit )
+    .then(res => res.json())
+    .then( result => result ) //Return que va hacia el login
+    .catch( err => console.log(err))
+}

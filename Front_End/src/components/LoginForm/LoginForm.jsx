@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Swal from "sweetalert2";
+import { userSignIn } from "../../api/userApi";
 
 export const LoginForm = () => {
   const [inputs, setinputs] = useState({
@@ -11,12 +12,12 @@ export const LoginForm = () => {
   const handleIputs = (e) => {
     const {target} = e;
     setinputs({...inputs, [target.name]: target.value})
-    console.log(inputs);
+    //console.log(inputs);
   }
 
   
 
-  const handleLogin = (e) =>{
+  const handleLogin = async (e) =>{
     e.preventDefault()
     if(!email || !password){
       Swal.fire(
@@ -24,6 +25,18 @@ export const LoginForm = () => {
         'All inputs are required',
         'error'
       )
+    }else {
+      const result = await userSignIn(inputs)
+      if(result.msg){
+        Swal.fire('Error', result.msg, 'error')
+      }else{
+        //Obtenemos y agregamos el token a una variable local
+        localStorage.setItem('accessToken', result.accessToken)
+        Swal.fire('¡WELCOME!', `Sr(@). ${inputs.email}`, 'success')
+        setTimeout(() => {
+          window.location.href = '/'
+        }, 1800);
+      }
     }
   }
   return (

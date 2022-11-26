@@ -2,6 +2,7 @@ const User = require("../models/UserModel");
 const bcrypt = require("bcrypt");
 
 const salt = "MisionTic2022"; //Nivel más alto de seguridad
+const jwt = require('../services/TokenGenerator')
 
 //Función para crear un Usuario
 const createUser = (req, res) => {
@@ -98,8 +99,9 @@ const deleteUser = (req, res) => {
 const loginUser = (req, res) => {
   const { body } = req
   const { email, password } = body
+
   //verificamos si el usuario existe o no
-  User.findOne({ email }, (err, userFinded) => {
+  User.findOne({ email: email.toLowerCase() }, (err, userFinded) => {
     if(err){
       res.send({msg: 'Error del servidor' + err })
     }else if(!userFinded){
@@ -113,7 +115,10 @@ const loginUser = (req, res) => {
         }else if(!result){
           res.send({msg: 'Usuario o Password invalido'})
         }else{
-          res.send({msg: 'Usuario encontrado', user: userFinded })
+          //Token
+          const token = jwt.createAccessToken(userFinded)
+          res.send({ accessToken: token })
+
         }
       })
 
