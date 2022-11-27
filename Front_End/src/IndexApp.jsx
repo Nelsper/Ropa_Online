@@ -18,7 +18,7 @@ const IndexApp = () => {
             
             <div className="bg-7">
                 
-                <h1 className="ofer efect">REBAJAS ¡Hasta el 50%!</h1>
+                <h1 className="ofer efect">¡SALE! 70% 60% 50% 40%</h1>
             </div>
         </div>
     </>
